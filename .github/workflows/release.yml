@@ -20,22 +20,28 @@ jobs:
         id: extract_tag
         run: echo "::set-output name=tag::${GITHUB_REF#refs/tags/}"
 
+      - name: set env VERSION
+        id: version
+        run: export VERSION=${{ steps.extract_tag.outputs.tag }}
+
       - name: Build Docker Image
         id: build-image
         run: |
           docker buildx build \
             --file infra/docker/app/Dockerfile \
-            --tag ${{ github.repository }}-app:${{ steps.extract_tag.outputs.tag }} \
+            --tag rapportnav-app:${{ steps.extract_tag.outputs.tag }} \
             .
 
       - name: Upload image to artifacts
         uses: ishworkh/docker-image-artifact-upload@v1
         with:
-          image: ${{ github.repository }}-app:${{ steps.extract_tag.outputs.tag }}
+          image: rapportnav-app:${{ steps.extract_tag.outputs.tag }}
 
       - name: Configure Docker Credentials
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
+      - name: Tag Docker Image to GitHub Packages
+        run: make docker-tag-app
+
       - name: Push Docker Image to GitHub Packages
-        run: |
-          docker push ${{ github.repository }}:${{ steps.extract_tag.outputs.tag }}
+        run: make docker-push-appdocker push ${{ github.repository }}:${{ steps.extract_tag.outputs.tag }}

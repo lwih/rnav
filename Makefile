@@ -86,6 +86,13 @@ logs-backend:
 
 
 
+# CI commands - app
+.PHONY: docker-tag-app docker-push-app run-infra-for-frontend-tests
+docker-tag-app:
+	docker tag rapportnav-app:$(VERSION) ghcr.io/lwih/rapportnav/rapportnav-app:$(VERSION)
+docker-push-app:
+	docker push ghcr.io/lwih/rapportnav/rapportnav-app:$(VERSION)
+
 
 
 
