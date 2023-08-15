@@ -13,21 +13,21 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      # - name: Setup Node.js environment
-      #   uses: actions/setup-node@v3.8.0
-      #   with:
-      #     cache: npm
-      #     cache-dependency-path: ./frontend/package-lock.json
-      #     node-version: 18
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v3.8.0
+        with:
+          cache: npm
+          cache-dependency-path: ./frontend/package-lock.json
+          node-version: 18
 
-      # - name: Install dependencies
-      #   run: make front-install
+      - name: "[FRONT] Install dependencies"
+        run: make front-install
 
-      # - name: Test
-      #   run: make front-test
+      - name: "[FRONT] Tests"
+        run: make front-test
 
-      # - name: Build
-      #   run: make front-build
+      - name: "[FRONT] Build"
+        run: make front-build
 
       - name: Setup Java JDK
         uses: actions/setup-java@v2
@@ -36,5 +36,8 @@ jobs:
           java-version: "17"
           java-package: jdk # optional (jdk or jre) - defaults to jdk
 
-      - name: build back
+      - name: "[BACKEND] Check clean architecture"
+        run: make check-clean-archi
+      
+        - name: "[BACKEND] Build"
         run: make back-build-mvn

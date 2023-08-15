@@ -43,7 +43,10 @@ back-start:
 .PHONY: back-build back-start
 
 
-.PHONY: back-start-dev
+.PHONY: check-clean-archi back-start-dev back-build-mvn
+
+check-clean-archi:
+	cd $(BACKEND_DIR)/tools && ./check-clean-architecture.sh
 
 back-build-mvn:
 	cd $(BACKEND_DIR) \
