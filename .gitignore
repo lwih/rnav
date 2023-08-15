@@ -2,7 +2,7 @@
 
 
 
-# in case someone does npm install in the root
+# in case someone does npm install at the root
 ./node_modules
 ./package.json
 ./package-lock.json
