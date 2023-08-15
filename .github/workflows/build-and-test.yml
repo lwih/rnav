@@ -1,4 +1,4 @@
-name: Makefile CI
+name: Build and Test
 
 on:
   push:
@@ -13,5 +13,5 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: build-and-test frontend
-        uses: ./build-and-test-frontend
+      - name: "[FRONTEND] Build and Test"
+        uses: ./.github/workflows/build-and-test-frontend.yml

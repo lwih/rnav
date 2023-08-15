@@ -1,7 +1,10 @@
-name: "[FRONTEND] build-and-test"
+name: "[FRONTEND] Build and Test"
 
 on:
-  workflow_call:
+  workflow_run:
+    workflows: ["Build and Test"]
+    types:
+      - completed
 
 jobs:
   build-and-test-frontend:
