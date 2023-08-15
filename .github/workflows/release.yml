@@ -25,13 +25,13 @@ jobs:
         run: |
           docker buildx build \
             --file infra/docker/app/Dockerfile \
-            --tag ${{ github.repository }}:${{ steps.extract_tag.outputs.tag }} \
+            --tag ${{ github.repository }}-app:${{ steps.extract_tag.outputs.tag }} \
             .
 
       - name: Upload image to artifacts
         uses: ishworkh/docker-image-artifact-upload@v1
         with:
-          image: rapportnav-app:${{ steps.extract_tag.outputs.tag }}
+          image: ${{ github.repository }}-app:${{ steps.extract_tag.outputs.tag }}
 
       - name: Configure Docker Credentials
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
