@@ -1,13 +1,10 @@
-name: Makefile CI
+name: "[FRONTEND] build-and-test"
 
 on:
-  push:
-    branches: ["main"]
-  pull_request:
-    branches: ["main"]
+  workflow_call:
 
 jobs:
-  frontend-build-and-test:
+  build-and-test-frontend:
     runs-on: ubuntu-latest
 
     steps:
