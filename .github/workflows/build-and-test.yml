@@ -38,6 +38,6 @@ jobs:
 
       - name: "[BACKEND] Check clean architecture"
         run: make check-clean-archi
-      
-        - name: "[BACKEND] Build"
+
+      - name: "[BACKEND] Build"
         run: make back-build-mvn
