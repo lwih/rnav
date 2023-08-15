@@ -43,7 +43,12 @@ back-start:
 .PHONY: back-build back-start
 
 
-.PHONY: back-run-dev
+.PHONY: back-start-dev
+
+back-build-mvn:
+	cd $(BACKEND_DIR) \
+	&& \
+	mvn clean package -DskipTests=true
 
 back-start-dev:
 	cd $(BACKEND_DIR) \
